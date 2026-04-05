@@ -1,0 +1,338 @@
+:root {
+    --bg-color: #F5E6D3; /* Light brown */
+    --card-bg: #FFFDF9; /* Cream */
+    --primary-accent: #E07A5F; /* Warm orange */
+    --primary-hover: #D0694E;
+    --text-dark: #3D2C23;
+    --text-light: #7A6357;
+    
+    --font-cursive: 'Great Vibes', 'Dancing Script', cursive;
+    --font-body: 'Outfit', sans-serif;
+    
+    --shadow: 0 8px 16px rgba(61, 44, 35, 0.08);
+    --radius: 16px;
+    --transition: 0.3s ease;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-dark);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    text-align: center;
+    padding: 2rem 1rem;
+    width: 100%;
+}
+
+.brand-title {
+    font-family: var(--font-cursive);
+    font-size: 4rem;
+    font-weight: 400;
+    color: var(--primary-accent);
+    margin-bottom: 0.2rem;
+    line-height: 1;
+}
+
+.brand-tagline {
+    font-family: var(--font-cursive);
+    font-size: 1.8rem;
+    color: var(--text-light);
+}
+
+#app-container {
+    width: 100%;
+    max-width: 600px;
+    padding: 0 1rem 2rem;
+    flex-grow: 1;
+}
+
+.screen {
+    display: none;
+    animation: fadeIn var(--transition);
+}
+
+.screen.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+    background-color: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 2rem;
+    box-shadow: var(--shadow);
+}
+
+/* Typography */
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+/* Forms & Buttons */
+.input-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 2px solid #EAE0D5;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--text-dark);
+    background-color: #FAFAF7;
+    transition: var(--transition);
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--primary-accent);
+}
+
+.btn {
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.primary-btn {
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--primary-accent);
+    color: white;
+    box-shadow: 0 4px 10px rgba(224, 122, 95, 0.3);
+}
+
+.primary-btn:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(224, 122, 95, 0.4);
+}
+
+.primary-btn:active {
+    transform: translateY(0);
+}
+
+.icon-btn {
+    background: var(--card-bg);
+    color: var(--text-dark);
+    padding: 0.6rem 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.icon-btn:hover {
+    background: #FFF;
+}
+
+.header-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+/* Menu Grid */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
+}
+
+.food-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition);
+}
+
+.food-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 20px rgba(61, 44, 35, 0.12);
+}
+
+.food-img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    background-color: #EAE0D5;
+}
+
+.food-info {
+    padding: 1rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.food-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+}
+
+.food-price {
+    color: var(--primary-accent);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.add-btn {
+    margin-top: auto;
+    background-color: #F8EDDF;
+    color: var(--primary-accent);
+    padding: 0.5rem;
+}
+
+.add-btn:hover {
+    background-color: var(--primary-accent);
+    color: white;
+}
+
+/* Cart */
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #EAE0D5;
+}
+
+.cart-item-details {
+    flex-grow: 1;
+}
+
+.cart-item-name {
+    font-weight: 600;
+}
+
+.cart-item-price {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.cart-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.qty-btn {
+    background: #EAE0D5;
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--text-dark);
+}
+
+.cart-empty {
+    text-align: center;
+    color: var(--text-light);
+    padding: 2rem 0;
+}
+
+.cart-summary {
+    margin-top: 1.5rem;
+}
+
+.cart-summary h3 {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+/* Tracking */
+.tracking-card {
+    text-align: center;
+}
+
+.status-indicator {
+    margin: 2rem 0;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #F8EDDF;
+    border-top: 4px solid var(--primary-accent);
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.countdown {
+    font-size: 3rem;
+    font-weight: 600;
+    font-family: monospace;
+    color: var(--primary-accent);
+    margin: 0.5rem 0 1.5rem;
+}
+
+.ready-message {
+    padding: 2rem 1rem;
+    background-color: #F8EDDF;
+    border-radius: 12px;
+    color: var(--primary-accent);
+    margin: 1rem 0;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Small adjustments for responsiveness */
+@media (max-width: 400px) {
+    .menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .brand-title {
+        font-size: 3.5rem;
+    }
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafeteria - Good vibes great food</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Great+Vibes&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    <meta name="theme-color" content="#F5E6D3">
+</head>
+<body>
+    <header>
+        <h1 class="brand-title">Cafeteria</h1>
+        <p class="brand-tagline">Good vibes great food</p>
+    </header>
+
+    <main id="app-container">
+        <!-- Login Screen -->
+        <section id="login-screen" class="screen active">
+            <div class="card login-card">
+                <h2>Welcome Student!</h2>
+                <form id="login-form">
+                    <div class="input-group">
+                        <label for="student-name">Name</label>
+                        <input type="text" id="student-name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="roll-number">Roll Number</label>
+                        <input type="text" id="roll-number" placeholder="Enter your roll number" required>
+                    </div>
+                    <button type="submit" class="btn primary-btn">Login to Order</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Menu Screen -->
+        <section id="menu-screen" class="screen">
+            <div class="header-actions">
+                <h2 class="greeting">Hi, <span id="user-greeting-name">Student</span>!</h2>
+                <button id="view-cart-btn" class="btn icon-btn">
+                    🛒 Cart (<span id="cart-count">0</span>)
+                </button>
+            </div>
+            
+            <div class="menu-grid" id="menu-grid">
+                <!-- Items will be injected by JS -->
+            </div>
+        </section>
+
+        <!-- Cart & Order Screen -->
+        <section id="cart-screen" class="screen">
+            <div class="header-actions">
+                <button id="back-to-menu-btn" class="btn icon-btn">← Back</button>
+                <h2>Your Order</h2>
+            </div>
+            
+            <div class="card cart-card">
+                <div id="cart-items-container">
+                    <!-- Cart items injected here -->
+                </div>
+                <div class="cart-summary">
+                    <h3>Total: ₹<span id="cart-total">0</span></h3>
+                    <button id="place-order-btn" class="btn primary-btn">Place Order</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tracking Screen -->
+        <section id="tracking-screen" class="screen">
+            <div class="card tracking-card">
+                <h2>Order <span id="display-order-id"></span></h2>
+                <div class="status-indicator">
+                    <div class="spinner" id="status-spinner"></div>
+                    <h3 id="order-status-text">Preparing your order...</h3>
+                </div>
+                
+                <div class="timer-container" id="timer-container">
+                    <p>Estimated time remaining:</p>
+                    <div class="countdown" id="countdown-timer">15:00</div>
+                </div>
+
+                <div class="ready-message hidden" id="ready-message">
+                    <h3>🎉 Your order is ready! 🎉</h3>
+                    <p>Please collect it from the canteen.</p>
+                </div>
+
+                <div class="order-details-summary" id="order-details-summary">
+                    <!-- Injected details -->
+                </div>
+                
+                <div class="tracking-actions" style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center;">
+                    <button id="cancel-order-btn" class="btn" style="background-color: #ff4444; color: white;">Cancel Order</button>
+                    <button id="tracking-back-btn" class="btn primary-btn" style="background-color: #6c757d;">Back to Menu</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
