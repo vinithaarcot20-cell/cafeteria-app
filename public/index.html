@@ -40,6 +40,7 @@
         <!-- Menu Screen -->
         <section id="menu-screen" class="screen">
             <div class="header-actions">
+                <button id="logout-btn" class="btn icon-btn">← Logout</button>
                 <h2 class="greeting">Hi, <span id="user-greeting-name">Student</span>!</h2>
                 <button id="view-cart-btn" class="btn icon-btn">
                     🛒 Cart (<span id="cart-count">0</span>)
@@ -64,13 +65,37 @@
                 </div>
                 <div class="cart-summary">
                     <h3>Total: ₹<span id="cart-total">0</span></h3>
-                    <button id="place-order-btn" class="btn primary-btn">Place Order</button>
+                    <button id="place-order-btn" class="btn primary-btn">Proceed to Payment</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Payment Screen -->
+        <section id="payment-screen" class="screen">
+            <div class="header-actions">
+                <button id="back-to-cart-btn" class="btn icon-btn">← Back</button>
+                <h2>Scan & Pay</h2>
+            </div>
+            <div class="card payment-card" style="text-align: center;">
+                <h3>Total Amount: ₹<span id="payment-amount">0</span></h3>
+                <p style="margin: 1rem 0; color: #555;">Scan the QR code below using any UPI app (GPay, PhonePe, Paytm, etc.)</p>
+                <div style="background: white; padding: 1rem; display: inline-block; border-radius: 8px; margin-bottom: 1.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    <img id="qr-code-img" src="" alt="UPI QR Code" style="width: 200px; height: 200px;">
+                </div>
+                <div>
+                    <button id="confirm-payment-btn" class="btn primary-btn" style="width: 100%;">Confirm Payment (I Have Paid)</button>
+                    <button id="cash-payment-btn" class="btn" style="width: 100%; margin-top: 10px; background-color: #f1f3f5; color: #333;">Cash on Delivery (Pay at Canteen)</button>
                 </div>
             </div>
         </section>
 
         <!-- Tracking Screen -->
         <section id="tracking-screen" class="screen">
+            <div class="header-actions">
+                <button id="tracking-top-back-btn" class="btn icon-btn">← Back</button>
+                <h2>Tracking</h2>
+                <div style="width: 70px;"></div> <!-- spacer -->
+            </div>
             <div class="card tracking-card">
                 <h2>Order <span id="display-order-id"></span></h2>
                 <div class="status-indicator">

@@ -22,6 +22,7 @@ const screens = {
     login: document.getElementById('login-screen'),
     menu: document.getElementById('menu-screen'),
     cart: document.getElementById('cart-screen'),
+    payment: document.getElementById('payment-screen'),
     tracking: document.getElementById('tracking-screen')
 };
 
@@ -31,6 +32,19 @@ function showScreen(screenName) {
     screens[screenName].classList.add('active');
     window.scrollTo(0,0);
 }
+
+document.getElementById('logout-btn').addEventListener('click', () => {
+    currentUser = null;
+    cart = [];
+    currentOrder = null;
+    updateCartCount();
+    document.getElementById('login-form').reset();
+    showScreen('login');
+});
+
+document.getElementById('tracking-top-back-btn').addEventListener('click', () => {
+    showScreen('menu');
+});
 
 // Login
 document.getElementById('login-form').addEventListener('submit', async (e) => {
@@ -156,10 +170,35 @@ window.updateQty = function(itemId, delta) {
     renderCart();
 };
 
-// Checkout & Tracking
-document.getElementById('place-order-btn').addEventListener('click', async () => {
+// Payment & Checkout
+document.getElementById('place-order-btn').addEventListener('click', () => {
     if (cart.length === 0) return;
     
+    const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    
+    // Setup Payment screen
+    document.getElementById('payment-amount').textContent = totalAmount;
+    
+    // Generate UPI QR Code URL
+    const upiId = 'canteen@upi'; // Default/placeholder UPI
+    const upiUrl = `upi://pay?pa=${upiId}&pn=Cafeteria&am=${totalAmount}&am=IN&cu=INR`;
+    const qrImageUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiUrl)}`;
+    
+    document.getElementById('qr-code-img').src = qrImageUrl;
+    
+    showScreen('payment');
+});
+
+document.getElementById('back-to-cart-btn').addEventListener('click', () => {
+    showScreen('cart');
+});
+
+document.getElementById('confirm-payment-btn').addEventListener('click', async () => {
+    // Prevent double clicking
+    const btn = document.getElementById('confirm-payment-btn');
+    btn.disabled = true;
+    btn.textContent = 'Processing...';
+
     const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     
     try {
@@ -185,6 +224,46 @@ document.getElementById('place-order-btn').addEventListener('click', async () =>
     } catch (err) {
         console.error(err);
         alert('Server connection error');
+    } finally {
+        btn.disabled = false;
+        btn.textContent = 'Confirm Payment (I Have Paid)';
+    }
+});
+
+document.getElementById('cash-payment-btn').addEventListener('click', async () => {
+    // Prevent double clicking
+    const btn = document.getElementById('cash-payment-btn');
+    btn.disabled = true;
+    btn.textContent = 'Processing...';
+
+    const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    
+    try {
+        const response = await fetch(`${API_BASE}/orders`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                userId: currentUser._id,
+                items: cart,
+                totalAmount
+            })
+        });
+        
+        const data = await response.json();
+        if (response.ok) {
+            cart = []; // clear cart
+            updateCartCount();
+            currentOrder = data.order;
+            startTracking();
+        } else {
+            alert(data.error || 'Failed to place order');
+        }
+    } catch (err) {
+        console.error(err);
+        alert('Server connection error');
+    } finally {
+        btn.disabled = false;
+        btn.textContent = 'Cash on Delivery (Pay at Canteen)';
     }
 });
 
